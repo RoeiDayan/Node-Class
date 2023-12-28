@@ -11,35 +11,47 @@ namespace Node_Class
     {
         static void Main(string[] args)
         {
-            Node<int> n1 = new Node<int>(10);
-            Node<int> n2 = new Node<int>(20, n1);
-            Node<int> n3 = new Node<int>(30, n2);
+            Console.WriteLine(node(5));
 
-            Console.WriteLine(e1(n3)); 
+
         }
-        public static void PrintNodes(Node<int> node)
+        public static Node<int> NodesListUp(int n)
         {
-            Node<int> newNode = node;
-
-            while(newNode != null)
+            Node<int> LastNode = null;
+            for (int i = n; i >= 1; i--)
             {
-                Console.WriteLine(newNode.GetValue());
-                newNode = newNode.GetNext();
+                Node<int> newNode = new Node<int>(i, LastNode);
+                LastNode = newNode;
             }
-
-            Console.WriteLine(node);
-            Console.WriteLine("new "+newNode);
+            return LastNode;
         }
-        public static int e1(Node<int> node)
+
+        public static Node<int> NodesListDown(int n)
         {
-            Node<int> node1 = node;
-            int counter = 0;
-            while(node1 != null)
+            Node<int> LastNode = null;
+            for (int i = 1; i <= n; i++)
             {
-                counter++;
-                node1 = node1.GetNext();
+                Node<int> newNode = new Node<int>(i, LastNode);
+                LastNode = newNode;
             }
-            return counter;
+            return LastNode;
         }
+
+        public static Node<int> node(int n)
+        {
+            return node(n, null);
+        }
+        public static Node<int> node(int n, Node<int> last)
+        {
+            if (n == 0)
+            {
+                return last;
+            }
+            Node<int> newNode = new Node<int>(n, last);
+            return node(n-1, newNode);
+        }
+
+
+        
     }
 }
